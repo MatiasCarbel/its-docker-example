@@ -4,17 +4,11 @@
 # Ejercicio 4> Hostear dos contenedores con la aplicación flask en puertos diferentes en el host (no hay que cambiar la aplicación)
 # Ejercicio 5> Agregar al Dockerfile en ./app  la aplicación de linux "nano"
 
+
 version: "2"
 
+
 services:
-  app:
-    build: ./app
-    links:
-      - db
-    ports:
-      - 8830:5000 #8830 - localhost del host, 5000 del container
-
-
   db:
     image: mysql:5.7
     environment:
@@ -23,5 +17,25 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
+      - dbdata:/var/lib/mysql
 
 
+  app:
+    build: ./app
+    links:
+      - db
+    environment:
+      DB_USER_NAME: username
+      DB_PASSWORD: password
+      NAME_HELLO: Matias Carbel
+    ports:
+      - 8830:5000 #8830 - localhost del host, 5000 del container
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    links:
+      - db
+    ports:
+      - 8080:80
