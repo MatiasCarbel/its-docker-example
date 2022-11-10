@@ -13,4 +13,7 @@ VALUES ('Malbec', 'Tinto'),
        ('Tempranillo', 'Tinto'),
        ('Syrah', 'Tinto'),
        ('Chenin', 'Blanco'),
-       ('Chardonnay', 'Blanco');
+       ('Chardonnay', 'Blanco')
+       ('Luigi Bosca', 'Tinto'),
+       ('Toro', 'Tinto')
+       ('Uvita', 'Tinto');
